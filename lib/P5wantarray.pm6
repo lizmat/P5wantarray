@@ -9,8 +9,11 @@ class P5wantarray:ver<0.0.1> {
 
 sub EXPORT(|) {
 
+    use nqp;
+    use QAST:from<NQP>;
+
     role Scalar::Grammar {
-        token statement_prefix:sym<scalar> { <sym><.kok> <blorst> }
+        token statement_prefix:sym<scalar> { <blorst> }
     }
     role Scalar::Actions {
         method statement_prefix:sym<scalar>($/)   {
@@ -23,14 +26,11 @@ sub EXPORT(|) {
         }
     }
 
-    use nqp;
-    use QAST:from<NQP>;
-
-#    nqp::bindkey(
-#      %*LANG,
-#      'MAIN',
-#      %*LANG<MAIN>.HOW.mixin(%*LANG<MAIN>,Scalar::Grammar)
-#    );
+    nqp::bindkey(
+      %*LANG,
+      'MAIN',
+      %*LANG<MAIN>.HOW.mixin(%*LANG<MAIN>,Scalar::Grammar)
+    );
     nqp::bindkey(
       %*LANG,
       'MAIN-actions',
