@@ -44,7 +44,7 @@ sub EXPORT(|) {
 
 =head1 NAME
 
-P5wantarray - Implement Perl 5's wantarray() built-in
+P5wantarray - Implement Perl 5's wantarray()/scalar() built-ins
 
 =head1 SYNOPSIS
 
