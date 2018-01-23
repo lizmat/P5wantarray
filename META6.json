@@ -1,0 +1,22 @@
+{
+  "authors" : [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "Implement Perl 5's wantarray()/scalar() built-ins",
+  "license" : "Artistic-2.0",
+  "name" : "P5wantarray",
+  "perl" : "6.c",
+  "provides" : {
+    "P5wantarray" : "lib/P5wantarray.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "https://github.com/lizmat/P5wantarray.git",
+  "tags" : [
+    "PERL5",
+    "CPAN5"
+  ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
