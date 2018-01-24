@@ -13,10 +13,12 @@ sub EXPORT(|) {
     use QAST:from<NQP>;
 
     role Scalar::Grammar {
-        token statement_prefix:sym<scalar> { <blorst> }
+        token statement_prefix:sym<scalar> { <sym><.kok> <blorst> }
     }
     role Scalar::Actions {
-        method statement_prefix:sym<scalar>($/)   {
+        method statement_prefix:sym<scalar>(Mu $/)   {
+            dd $/;
+            CATCH { dd $_ }
             make QAST::Op.new(
               :op<call>,
               :name<&scalar>,
@@ -26,15 +28,10 @@ sub EXPORT(|) {
         }
     }
 
-    nqp::bindkey(
-      %*LANG,
+    $*LANG.define_slang(
       'MAIN',
-      %*LANG<MAIN>.HOW.mixin(%*LANG<MAIN>,Scalar::Grammar)
-    );
-    nqp::bindkey(
-      %*LANG,
-      'MAIN-actions',
-      %*LANG<MAIN-actions>.HOW.mixin(%*LANG<MAIN-actions>,Scalar::Actions)
+      $*LANG.slang_grammar('MAIN').^mixin(Scalar::Grammar),
+      $*LANG.slang_actions('MAIN').^mixin(Scalar::Actions),
     );
 
     {}
